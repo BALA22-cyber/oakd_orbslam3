@@ -189,11 +189,24 @@ int main(int argc, char *argv[]) {
 
         // Pass the images into the SLAM system. This produces a matrix with
         // the pose information of the camera.
-        cv::Mat raw_pose = SLAM.TrackStereo(
+        // cv::Mat raw_pose = SLAM.TrackStereo(
+        //     rectif_left,
+        //     rectif_right,
+        //     frame_timestamp_s
+        // );
+
+        Sophus::SE3f raw_pose_sophus = SLAM.TrackStereo(
             rectif_left,
             rectif_right,
             frame_timestamp_s
         );
+
+        // Convert Sophus::SE3f to cv::Mat (4x4 transformation matrix)
+        cv::Mat raw_pose = (cv::Mat_<float>(4,4) <<
+        raw_pose_sophus.rotationMatrix()(0,0), raw_pose_sophus.rotationMatrix()(0,1), raw_pose_sophus.rotationMatrix()(0,2), raw_pose_sophus.translation()(0),
+        raw_pose_sophus.rotationMatrix()(1,0), raw_pose_sophus.rotationMatrix()(1,1), raw_pose_sophus.rotationMatrix()(1,2), raw_pose_sophus.translation()(1),
+        raw_pose_sophus.rotationMatrix()(2,0), raw_pose_sophus.rotationMatrix()(2,1), raw_pose_sophus.rotationMatrix()(2,2), raw_pose_sophus.translation()(2),
+        0, 0, 0, 1);
 
         // The output pose may be empty if the system was unable to track the
         // movement, so only get position and rotation if pose isn't empty. We

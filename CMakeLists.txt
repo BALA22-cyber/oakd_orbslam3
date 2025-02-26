@@ -10,7 +10,7 @@ set(CMAKE_BUILD_TYPE Debug)
 # ORB_SLAM3 Library
 set(ORB_SLAM3_DIR "./ORB_SLAM3")
 
-find_package(OpenCV 3)
+find_package(OpenCV 4)
 if(NOT OpenCV_FOUND)
    find_package(OpenCV 2.4.3 QUIET)
    if(NOT OpenCV_FOUND)
@@ -44,6 +44,7 @@ add_executable(${TARGET_NAME}
     src/main.cpp
     src/util.cpp
 )
+
 target_link_libraries(${TARGET_NAME} PUBLIC
     ${OpenCV_LIBS}
     depthai-core
