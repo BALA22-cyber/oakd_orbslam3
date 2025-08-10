@@ -17,7 +17,7 @@ Support for OpenCV 3 or 4 is selected by the branch you choose:
   slightly fixed version of ORB_SLAM3 which targets OpenCV 3.
 - [`opencv_4`](https://github.com/duncanrhamill/oakd_orbslam3/tree/opencv_4):
   Uses a PR branch of ORB_SLAM3 which targets OpenCV 4.
- make sure to build opencv4 along with ['opencv_contrib'](https://github.com/opencv/opencv_contrib) for additional dependencies required by 
+- make sure to build opencv4 along with ['opencv_contrib'](https://github.com/opencv/opencv_contrib) for additional dependencies required by 
 ## Build
 
 1. Download ORB_SLAM3 submodule (note this is a fork that fixes some build
